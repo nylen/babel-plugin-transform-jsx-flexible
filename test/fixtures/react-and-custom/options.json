@@ -1,0 +1,13 @@
+{
+	"plugins": [
+		[
+			"transform-jsx-flexible", {
+				"tags": {
+					"CustomTag1": "createElement_CustomTag1",
+					"CustomTag2": "createElement_CustomTag2"
+				}
+			}
+		]
+	]
+}
+
