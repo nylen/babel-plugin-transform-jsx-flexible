@@ -2,7 +2,7 @@
   "name": "babel-plugin-transform-jsx-flexible",
   "author": "James Nylen <jnylen@gmail.com>",
   "description": "Babel plugin to allow multiple JSX handlers in the same file.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/nylen/babel-plugin-transform-jsx-flexible"
