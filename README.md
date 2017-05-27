@@ -23,9 +23,7 @@ npm install --save-dev babel-plugin-transform-react-jsx
 
 ### Via `.babelrc` (Recommended)
 
-**.babelrc**
-
-Without options (no different from `transform-react-jsx`):
+#### Without options (no different from `transform-react-jsx`):
 
 ```json
 {
@@ -33,15 +31,15 @@ Without options (no different from `transform-react-jsx`):
 }
 ```
 
-With options:
+#### With options:
 
 ```json
 {
   "plugins": [
     ["transform-jsx-flexible", {
       "tags": {
-        "CustomTag1": "createElement_CustomTag1",
-        "CustomTag2": "createElement_CustomTag2"
+        "somelib.CustomTag1": "createElement_CustomTag1",
+        "somelib.CustomTag2": "createElement_CustomTag2"
       }
     }]
   ]
@@ -56,9 +54,9 @@ var profile = <div>
   <h3>{[user.firstName, user.lastName].join(' ')}</h3>
 </div>;
 
-var somethingElse = <CustomTag1>
+var somethingElse = <somelib.CustomTag1>
   <div />
-</CustomTag1>;
+</somelib.CustomTag1>;
 ```
 
 **Code Out**
@@ -69,7 +67,7 @@ var profile = React.createElement("div", null,
   React.createElement("h3", null, [user.firstName, user.lastName].join(" "))
 );
 
-var somethingElse = createElement_CustomTag1(CustomTag1, null,
+var somethingElse = createElement_CustomTag1(somelib.CustomTag1, null,
   createElement_CustomTag1("div", null)
 );
 ```
@@ -107,18 +105,22 @@ For example:
   "transform-jsx-flexible",
   {
     "tags": {
-      "CustomTag1": "createElement_CustomTag1",
-      "CustomTag2": "createElement_CustomTag2"
+      "somelib.CustomTag1": "createElement_CustomTag1",
+      "somelib.CustomTag2": "createElement_CustomTag2"
     }
   }
 ]
 ```
 
-Using this configuration, any `CustomTag1` element and any JSX elements
+Using this configuration, any `somelib.CustomTag1` element and any JSX elements
 enclosed inside of it will be created using the function
 `createElement_CustomTag1()` in the transpiled JS code, instead of
 `React.createElement` (or the current default JSX function).
 
-The same goes for `CustomTag2` and `createElement_CustomTag2`.  Also, JSX
-handlers can be changed within the same block by nesting these custom tags
+The same goes for `somelib.CustomTag2` and `createElement_CustomTag2`.  Also,
+JSX handlers can be changed within the same block by nesting these custom tags
 together.
+
+For clarity and explicitness, it's recommended, but not required, to specify
+any custom tags with a member expression (`somelib.CustomTag1` in the examples
+above), rather than simply a tag name.
