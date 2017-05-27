@@ -1,4 +1,4 @@
-# babel-plugin-transform-jsx-flexible [![Build status](https://img.shields.io/travis/nylen/babel-plugin-transform-jsx-flexible.svg?style=flat)](https://travis-ci.org/nylen/babel-plugin-transform-jsx-flexible) [![npm package](http://img.shields.io/npm/v/babel-plugin-transform-jsx-flexible.svg?style=flat)](https://www.npmjs.org/package/babel-plugin-transform-jsx-flexible)
+# babel-plugin-transform-jsx-flexible [![Build status](https://img.shields.io/travis/nylen/babel-plugin-transform-jsx-flexible/master.svg?style=flat)](https://travis-ci.org/nylen/babel-plugin-transform-jsx-flexible) [![npm package](http://img.shields.io/npm/v/babel-plugin-transform-jsx-flexible.svg?style=flat)](https://www.npmjs.org/package/babel-plugin-transform-jsx-flexible)
 
 > Turn JSX into arbitrary function calls
 
