@@ -8,6 +8,18 @@ module.exports = function( { types: t } ) {
 			.reduce( ( object, property ) => t.memberExpression( object, property ) );
 	}
 
+	function getJSXMemberExpressionName( expr ) {
+		let namePieces = [];
+		if ( expr.object.object && expr.object.property ) {
+			namePieces = namePieces.concat(
+				getJSXMemberExpressionName( expr.object )
+			);
+		} else {
+			namePieces = namePieces.concat( expr.object.name );
+		}
+		return namePieces.concat( expr.property.name );
+	}
+
 	const JSX_ANNOTATION_REGEX = /\*?\s*@jsx\s+([^\s]+)/;
 
 	const visitor = helper( {
@@ -42,10 +54,20 @@ module.exports = function( { types: t } ) {
 			do {
 				const openingElement = currentPath.get( 'openingElement' );
 				if ( openingElement && openingElement.node ) {
-					const nodeName = openingElement.node.name.name;
-					if ( tagOptions[ nodeName ] ) {
+					const nodeNameExpr = openingElement.node.name;
+					let elementName;
+					if ( nodeNameExpr.type === 'JSXIdentifier' ) {
+						// A simple JSX expression like <TagName>
+						elementName = nodeNameExpr.name;
+					} else if ( nodeNameExpr.type === 'JSXMemberExpression' ) {
+						// A JSX member expression like <obj.TagName>
+						elementName = getJSXMemberExpressionName( nodeNameExpr )
+							.join( '.' );
+					}
+
+					if ( tagOptions[ elementName ] ) {
 						jsxCurrentIdentifier = stringToCallExpression(
-							tagOptions[ nodeName ]
+							tagOptions[ elementName ]
 						);
 						break;
 					}

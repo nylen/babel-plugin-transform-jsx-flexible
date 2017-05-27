@@ -1,0 +1,14 @@
+{
+	"plugins": [
+		[
+			"transform-jsx-flexible", {
+				"tags": {
+					"CustomTag1": "createElement_CustomTag1",
+					"namespaced.CustomTag2": "createElement_CustomTag2",
+					"namespaced.rather.deeply.CustomTag3": "somelib.createElement_CustomTag3"
+				}
+			}
+		]
+	]
+}
+
